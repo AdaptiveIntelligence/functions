@@ -1,0 +1,25 @@
+#!/bin/bash
+###########################
+function networkVariables()
+  {
+  # Uses the airport command line utility to get the current SSID
+	# Use airport to list the information |
+	# awk using the field separator of SSID: and print the second field
+	currentNetwork=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I | awk -F: '/ SSID: / {print $2}' | sed -e 's/SSID: //' | sed -e 's/ //')
+	
+	# Determine if the wireless interface is called Wi-Fi or Airport
+	wifiOrAirport=$(/usr/sbin/networksetup -listallnetworkservices | grep -Ei '(Wi-Fi|AirPort)')
+
+	# Determine what the wireless device interface number is
+	# awk out Wi-Fi or Airport name and the word Device |
+	# awk only two lines |
+	# cut using whitespace as the delimiter, printing the second field
+	wirelessDevice=$(/usr/sbin/networksetup -listallhardwareports | awk "/$wifiOrAirport/,/Device/" | awk 'NR==2' | cut -d " " -f 2)
+	
+	# Determine what the wired device interface number is
+	# grep one line following a match to the word Port: Ethernet |
+	# sed silently, search for Device | 
+	# awk the second field only
+	wiredDevice=$(networksetup -listallhardwareports | grep -A 1 "Port: Ethernet" | sed -n 's/Device/&/p' | awk '{print $2}')
+  
+  }
