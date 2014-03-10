@@ -1,4 +1,5 @@
 functions
 =========
 
-Reusable bash functions
+(OS X) Reusable bash functions
+
