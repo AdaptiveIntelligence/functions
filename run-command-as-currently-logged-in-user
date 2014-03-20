@@ -10,6 +10,11 @@
 
 #----------VARIABLES---------
 	currentuser=$(stat -f "%Su" /dev/console)
+	# Alternate ways to get the currently logged in user
+	#	currentUser=$(who | grep console | awk '{print $1}')
+	#	currentUser=$(logname)
+	#	currentUser=$(ls -l /dev/console | cut -d " " -f4)
+	
 
 #----------FUNCTIONS---------
 ###########################
