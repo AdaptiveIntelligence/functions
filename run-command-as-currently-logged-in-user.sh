@@ -14,6 +14,7 @@
 	#	currentUser=$(who | grep console | awk '{print $1}')
 	#	currentUser=$(logname)
 	#	currentUser=$(ls -l /dev/console | cut -d " " -f4)
+	#	currentUser=$(printf "get State:/Users/ConsoleUser\nd.show" | scutil | awk '/kCGSSessionUserNameKey/ {print $3}')
 	
 
 #----------FUNCTIONS---------
