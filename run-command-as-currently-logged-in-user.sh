@@ -9,7 +9,7 @@
 	# Commands must be properly escaped in order to run correctly
 
 #----------VARIABLES---------
-	currentuser=$(stat -f "%Su" /dev/console)
+	currentUser=$(stat -f "%Su" /dev/console)
 	# Alternate ways to get the currently logged in user
 	#	currentUser=$(who | grep console | awk '{print $1}')
 	#	currentUser=$(logname)
@@ -23,7 +23,7 @@ function runCommandAsUser()
 
 	{	
 	# Run command as user
-	su -c "$currentUser" "$1"
+	su "$currentUser" -c "$1"
 	}
 
 #----------------------------
